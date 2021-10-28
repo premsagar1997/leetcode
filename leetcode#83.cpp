@@ -11,31 +11,20 @@
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
-        ListNode* cp = head;
-        ListNode* temp = NULL;
-        stack<ListNode*> st;
-        int cVal = INT_MAX;
+        if (head == NULL)
+            return head;
         
-        while (cp != NULL) {
-            st.push(cp);
-            cp = cp->next;
-        }
-        
-        cp = NULL;
-        while (!st.empty()) {
-            temp = st.top();
-            st.pop();
-            if (cVal != temp->val) {
-                cVal = temp->val;
-                if (cp == NULL) {
-                    cp = temp;
-                } else {
-                    temp->next = cp;
-                    cp = temp;
-                }
+        ListNode* prev = head;
+        ListNode* current = head;
+        while (current != NULL) {
+            if (current->val != prev->val) {
+                prev->next = current;
+                prev = current;
             }
+            current = current->next;
         }
         
-        return cp;
+        prev->next = NULL;
+        return head;
     }
 };
