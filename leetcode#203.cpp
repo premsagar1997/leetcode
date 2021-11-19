@@ -10,6 +10,7 @@
  */
 class Solution {
 public:
+    //1st Method
     ListNode* removeElements(ListNode* head, int val) {
         stack<ListNode*> st;
         ListNode* ptr = head;
@@ -29,5 +30,27 @@ public:
         }
         
         return ptr;
+    }
+    
+    //2nd Method
+    ListNode* removeElements(ListNode* head, int val) {
+        ListNode* current = head;
+        ListNode* prev = NULL;
+        
+        while (current != NULL) {
+            if (current->val == val && current == head) {
+                current = current->next;
+                head = current;
+                prev = current;
+            } else if (current->val == val) {
+                current = current->next;
+                prev->next = current;
+            } else {
+                prev = current;
+                current = current->next;
+            }
+        }
+        
+        return head;
     }
 };
