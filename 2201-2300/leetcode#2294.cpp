@@ -6,13 +6,14 @@ public:
         sort(begin(nums), end(nums));
 
         int count = 1;
-        int j = 0;
-        for (int i = 1; i < n; i++) {
-            if (nums[i] - nums[j] > k) {
-                j = i;
+        int minVal = nums[0];
+        for (int i = 0; i < n; i++) {
+            if (nums[i] - minVal > k) {
+                minVal = nums[i];
                 count++;
             }
         }
+        
         return count;
     }
 };
